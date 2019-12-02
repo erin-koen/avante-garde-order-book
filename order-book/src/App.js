@@ -7,17 +7,22 @@ import OrderBook from './components/orderBook.js'
 import { updateBook } from './actions/actions.js'
 
 class App extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+    this.updateInterval = this.updateInterval.bind(this)
   }
 
   async componentDidMount () {
-    await this.props.updateBook()
+    this.updateInterval()
+  }
+
+  updateInterval(){
+    setInterval(this.props.updateBook(), 500)
   }
 
   render () {
-    if (this.props.prices.length > 0) {
-      return <OrderBook prices={this.props.prices} />
+    if (this.props.bids.length > 0) {
+      return <OrderBook bids={this.props.bids} asks={this.props.asks} />
     } else {
       return (
         <div>
@@ -28,9 +33,11 @@ class App extends React.Component {
   }
 }
 
+
 const mapStateToProps = state => {
   return {
-    prices: state.prices
+    bids: state.prices.bids,
+    asks: state.prices.asks
   }
 }
 

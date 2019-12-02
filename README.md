@@ -40,8 +40,9 @@ Data comes back from Kraken (SLOWLY) in an array of bids and an array of asks, e
     ```
     but I'm not sure that'll be sorted correctly when i access it. TBD.
     - update: changed format of sorted data to reflect what i'll need for React-Vis, an array of objects with color properties according to bid vs ask
-     
+
 - send to reducer to set new state
+- update - I'm switching to coinbase pro as their data retrieval is MUCH fast
 
 App component architecture - 
 - App = will call the action on component did mount and map state to props
