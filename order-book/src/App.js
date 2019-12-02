@@ -1,35 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react'
+import './App.css'
 import { connect } from 'react-redux'
+import { Spinner } from 'reactstrap'
 
+import OrderBook from './components/orderBook.js'
 import { updateBook } from './actions/actions.js'
 
 class App extends React.Component {
-  constructor(){
-    super();
+  constructor () {
+    super()
   }
 
-  async componentDidMount() {
-    console.log(this.props)
-    await this.props.updateBook()  
-    console.log('after', this.props)
+  async componentDidMount () {
+    await this.props.updateBook()
   }
 
-  render() {
-    return (
-      <div>
-        
-      </div>
-    );
+  render () {
+    if (this.props.prices.length > 0) {
+      return <OrderBook prices={this.props.prices} />
+    } else {
+      return (
+        <div>
+          <Spinner color='primary' />
+        </div>
+      )
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    bids: state.bids,
-    asks: state.asks
+    prices: state.prices
   }
 }
 
@@ -39,4 +40,3 @@ export default connect(
     updateBook
   }
 )(App)
-

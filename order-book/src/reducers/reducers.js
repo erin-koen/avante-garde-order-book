@@ -1,8 +1,7 @@
 import { UPDATE_BOOK, FETCHING, FAILURE } from '../actions/actions.js'
 
 const initialState = {
-  bids: [],
-  asks: [],
+  prices: [],
   fetching: false,
   error: ''
 }
@@ -10,13 +9,12 @@ const initialState = {
 function reducer (state = initialState, action) {
   switch (action.type) {
     case UPDATE_BOOK:
-      console.log('in reducer', action.payload.XXBTZUSD.bids)
+      console.log(action.payload)
       return {
         ...state,
-        bids: action.payload.XXBTZUSD.bids,
-        asks: action.payload.XXBTZUSD.asks
+        prices: action.payload
       }
-    // do work and update state
+
     default:
       return state
   }
