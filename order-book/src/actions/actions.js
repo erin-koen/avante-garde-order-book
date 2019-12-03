@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {axiosWithoutAuth} from '../config/AxiosConfig'
+import { axiosWithoutAuth } from '../config/AxiosConfig'
 
 const proxyUrl = `https://cors-anywhere.herokuapp.com/`
 const baseUrl = `https://api.kraken.com/0/public/Depth?`
@@ -8,7 +8,6 @@ const count = `&count=50`
 
 const cbBase = 'https://api.pro.coinbase.com'
 const cbPair = 'BTC-USD'
- 
 
 const url = proxyUrl + baseUrl + pair + count
 const cbUrl = `${proxyUrl}${cbBase}/products/${cbPair}/book?level=2`
@@ -17,7 +16,7 @@ export const FETCHING = 'FETCHING'
 export const FAILURE = 'FAILURE'
 
 export const updateBook = () => dispatch => {
-  console.log('before')
+  console.log('calling coinbase ring ring')
   axiosWithoutAuth()
     .get(cbUrl)
     .then(res => {
@@ -28,8 +27,8 @@ export const updateBook = () => dispatch => {
       let bidSum = 0
       let askSum = 0
       let prices = {
-        bids:[],
-        asks:[]
+        bids: [],
+        asks: []
       }
 
       // add bids to array
@@ -40,14 +39,14 @@ export const updateBook = () => dispatch => {
         const priceObj = {
           color: '#00ff00',
           x: price,
-          y: bidSum 
+          y: bidSum
         }
         prices.bids.push(priceObj)
       })
-      console.log(prices)
+
       // reverse array to get bids in correct order
       prices.bids.reverse()
-      console.log(prices)
+
       // add asks to array
       res.data.asks.forEach(ask => {
         let price = parseFloat(ask[0])
@@ -64,5 +63,4 @@ export const updateBook = () => dispatch => {
       dispatch({ type: UPDATE_BOOK, payload: prices })
     })
     .catch(error => dispatch({ type: FAILURE, payload: error }))
-  console.log('after')
 }

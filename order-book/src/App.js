@@ -9,15 +9,13 @@ import { updateBook } from './actions/actions.js'
 class App extends React.Component {
   constructor (props) {
     super(props)
-    this.updateInterval = this.updateInterval.bind(this)
+
   }
 
   async componentDidMount () {
-    this.updateInterval()
-  }
+    await this.props.updateBook()
+    this.updateInterval = setInterval(this.props.updateBook(), 500)
 
-  updateInterval(){
-    setInterval(this.props.updateBook(), 500)
   }
 
   render () {
