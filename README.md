@@ -13,9 +13,9 @@ TODO: Fill out this long description.
 
 ## Install
 
-> Clone this repo to your local machine, and navigate into `order-book` in your terminal
-> install the necessary dependencies from package.json using `yarn install` or `npm i`
-> `yarn start` or `npm start` will launch the app
+- Clone this repo to your local machine, and navigate into `order-book` in your terminal
+- install the necessary dependencies from package.json using `yarn install` or `npm i`
+- To launch the app, use `yarn start` or `npm start` 
 
 
 
