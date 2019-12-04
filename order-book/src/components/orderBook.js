@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
   FlexibleXYPlot,
   XAxis,
@@ -23,4 +24,11 @@ const OrderBook = props => {
   )
 }
 
-export default OrderBook
+const mapStateToProps = state => {
+  return {
+    bids: state.prices.bids,
+    asks: state.prices.asks
+  }
+}
+
+export default connect(mapStateToProps)(OrderBook)
