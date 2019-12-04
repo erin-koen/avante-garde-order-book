@@ -20,7 +20,6 @@ export const updateBook = () => dispatch => {
   axiosWithoutAuth()
     .get(cbUrl)
     .then(res => {
-      console.log(res.data)
       // instantiate bid sum and ask sum to zero
       // res.data.result.XXBTZUSD. bids/asks => hard code for now
       // create dictionary where key = price and value = sum
@@ -65,8 +64,9 @@ export const updateBook = () => dispatch => {
         }
         prices.asks.push(priceObj)
       })
-      console.log(prices)
+
       dispatch({ type: UPDATE_BOOK, payload: prices })
     })
-    .catch(error => dispatch({ type: FAILURE, payload: error }))
+    .catch(error => {console.log(error)
+    dispatch({ type: FAILURE, payload: error })})
 }

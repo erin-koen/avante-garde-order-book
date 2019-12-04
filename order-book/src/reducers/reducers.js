@@ -2,28 +2,34 @@ import { UPDATE_BOOK, FETCHING, FAILURE } from '../actions/actions.js'
 
 const initialState = {
   prices: {
-    bids:[],
-    asks:[]
+    bids: [],
+    asks: []
   },
   fetching: false,
-  error: ''
+  error: null
 }
 
 function reducer (state = initialState, action) {
   switch (action.type) {
     case UPDATE_BOOK:
-      console.log(action.payload)
       return {
         ...state,
         prices: {
           bids: action.payload.bids,
           asks: action.payload.asks
-        }
-
+        },
+        error: false
       }
 
     default:
       return state
+    
+    case FAILURE:
+      console.log(action.payload)
+      return {
+        ...state,
+        error: true
+      }
   }
 }
 
