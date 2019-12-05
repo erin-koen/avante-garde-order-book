@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table } from 'reactstrap'
+import uuid from 'react-uuid'
 
 const orderTable = props => {
   let prices = []
@@ -16,7 +17,7 @@ const orderTable = props => {
       </thead>
       <tbody>
         {prices.map(price => (
-          <tr>
+          <tr key={uuid()}>
             <th scope='row'>{price.count}</th>
             <td>{price.amount}</td>
             <td>{price.y}</td>

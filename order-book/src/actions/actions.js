@@ -37,9 +37,7 @@ export const updateBook = () => dispatch => {
       // add bids to array
       res.data.bids.forEach(bid => {
         let price = parseFloat(bid[0])
-        console.log(price)
         let amount = stringToFloat(bid[1])
-        console.log(amount)
         let bids = bid[2]
         bidSum += amount
         const priceObj = {

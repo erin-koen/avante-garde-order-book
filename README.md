@@ -17,7 +17,7 @@ TODO: Fill out this long description.
 - install the necessary dependencies from package.json using `yarn install` or `npm i`
 - To launch the app, use `yarn start` or `npm start` 
 
-- Note - i'm continuing to update this repo so it's worth calling `git pull master` if you didn't *just* clone it.
+- Note - i'm continuing to update this repo so it's worth calling `git pull origin master` if you didn't *just* clone it.
 
 
 
