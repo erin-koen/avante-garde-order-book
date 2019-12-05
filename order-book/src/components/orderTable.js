@@ -10,8 +10,8 @@ const orderTable = props => {
         <tr>
           {props.bids ? <th>BIDS</th> : <th>OFFERS</th>}
           <th>Amount At Level</th>
-          <th>Total</th>
-          <th>Price</th>
+          <th>Total Available</th>
+          <th>Price ($)</th>
         </tr>
       </thead>
       <tbody>

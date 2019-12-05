@@ -12,8 +12,13 @@ const cbPair = 'BTC-USD'
 const url = proxyUrl + baseUrl + pair + count
 const cbUrl = `${proxyUrl}${cbBase}/products/${cbPair}/book?level=2`
 export const UPDATE_BOOK = 'UPDATE_BOOK'
-export const FETCHING = 'FETCHING'
 export const FAILURE = 'FAILURE'
+
+const stringToFloat = str => {
+  // take input string, cut it to four decimal places, return it as a float
+  const sliceIndex = str.indexOf('.') + 5
+  return parseFloat(str.slice(0, sliceIndex))
+}
 
 export const updateBook = () => dispatch => {
   console.log('calling coinbase ring ring')
@@ -21,8 +26,7 @@ export const updateBook = () => dispatch => {
     .get(cbUrl)
     .then(res => {
       // instantiate bid sum and ask sum to zero
-      // res.data.result.XXBTZUSD. bids/asks => hard code for now
-      // create dictionary where key = price and value = sum
+
       let bidSum = 0
       let askSum = 0
       let prices = {
@@ -32,14 +36,16 @@ export const updateBook = () => dispatch => {
 
       // add bids to array
       res.data.bids.forEach(bid => {
-        let price = parseInt(bid[0])
-        let amount = parseInt(bid[1])
+        let price = parseFloat(bid[0])
+        console.log(price)
+        let amount = stringToFloat(bid[1])
+        console.log(amount)
         let bids = bid[2]
         bidSum += amount
         const priceObj = {
           color: '#00ff00',
           x: price,
-          y: bidSum,
+          y: stringToFloat(bidSum.toString()),
           amount: amount,
           count: bids
         }
@@ -51,14 +57,14 @@ export const updateBook = () => dispatch => {
 
       // add asks to array
       res.data.asks.forEach(ask => {
-        let price = parseInt(ask[0])
-        let amount = parseInt(ask[1])
+        let price = parseFloat(ask[0])
+        let amount = stringToFloat(ask[1])
         let offers = ask[2]
         askSum += amount
         const priceObj = {
           color: '#ff0000',
           x: price,
-          y: askSum,
+          y: stringToFloat(askSum.toString()),
           amount: amount,
           count: offers
         }
@@ -67,6 +73,8 @@ export const updateBook = () => dispatch => {
 
       dispatch({ type: UPDATE_BOOK, payload: prices })
     })
-    .catch(error => {console.log(error)
-    dispatch({ type: FAILURE, payload: error })})
+    .catch(error => {
+      console.log(error)
+      dispatch({ type: FAILURE, payload: error })
+    })
 }

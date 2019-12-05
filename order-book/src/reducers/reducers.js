@@ -1,4 +1,4 @@
-import { UPDATE_BOOK, FETCHING, FAILURE } from '../actions/actions.js'
+import { UPDATE_BOOK, FAILURE } from '../actions/actions.js'
 
 const initialState = {
   prices: {
